@@ -16,17 +16,3 @@ export default class DatabaseConnection {
   
   }
 }
-
-// export function connectMongoDB(callback: (arg0: Db) => void): void {
-//   MongoClient.connect(config.mongoConnectionURL, {
-//       promiseLibrary: Promise,
-//   }).then(client => {
-//       _mongoDB = client.db()
-//       console.log('database connection successfully');
-//       callback(_mongoDB);
-//   }).catch(err => {
-//       console.error('Failed to make database connections!')
-//       console.error(err)
-//       process.exit(1)
-//   })
-// }

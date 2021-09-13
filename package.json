@@ -2,13 +2,13 @@
   "name": "college-management-api-server",
   "version": "1.0.0",
   "description": "api-server",
-  "main": "public/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "npm run tsc",
     "tsc": "tsc --project tsconfig.json",
     "start:dev": "nodemon --watch 'src/**/*.ts' --ignore 'node_modules/**/*' --exec ts-node -r tsconfig-paths/register src/index.ts",
-    "start":"npm run build && cross-env NODE_ENV=production node public/index.js",
-    "start:prod": "npm run build && cross-env NODE_ENV=production node public/index.js"
+    "start":"npm run build && cross-env NODE_ENV=production node dist/index.js",
+    "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js"
   },
   "engines": {
     "node": "12.x"
@@ -16,14 +16,14 @@
   "author": "deepak sain",
   "license": "ISC",
   "_moduleAliases": {
-    "@lib": "public/lib",
-    "@config": "public/config",
-    "@controllers": "public/api/controllers",
-    "@models": "public/api//models",
-    "@services": "public/api/services",
-    "@repository": "public/api/repository",
-    "@utils": "public/api/utils",
-    "@interfaces": "public/interfaces"
+    "@lib": "dist/lib",
+    "@config": "dist/config",
+    "@controllers": "dist/api/controllers",
+    "@models": "dist/api//models",
+    "@services": "dist/api/services",
+    "@repository": "dist/api/repository",
+    "@utils": "dist/api/utils",
+    "@interfaces": "dist/interfaces"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

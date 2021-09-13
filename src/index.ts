@@ -26,7 +26,7 @@ class Index {
 
     this.server.on('listening', () => {
       console.log(
-        `Server started on port ${config.PORT} on env ${process.env.NODE_ENV ||
+        `Server started on port ${process.env.PORT || config.PORT} on env ${process.env.NODE_ENV ||
         'dev'}`,
       )
     })
