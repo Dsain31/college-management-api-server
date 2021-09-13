@@ -1,5 +1,5 @@
 import 'module-alias/register'
-import { Express } from 'express'
+import express, { Express } from 'express'
 import * as http from 'http'
 import dotenv from 'dotenv'
 import { config } from '@config/index';
@@ -14,6 +14,7 @@ class Index {
   constructor() {
     DatabaseConnection.mongoDbConnection()
     this.app = appServer();
+    this.app.use(express.static(__dirname + "/../public"));
     this.server = new http.Server(this.app);
     this.routes();
   }
