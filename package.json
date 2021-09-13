@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run build-ts",
     "tsc": "tsc --project tsconfig.json",
     "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js",
-    "start": "ts-node -r tsconfig-paths/register src/index.ts"
+    "start": "npm run build && cross-env NODE_ENV=production node dist/index.js"
   },
   "author": "deepak sain",
   "license": "ISC",

@@ -12,7 +12,7 @@ export class AppServerRouter {
       
         app.use(express.urlencoded({ extended: true }));
       
-        app.use('/ping', (req, res) => {
+        app.use('/', (req, res) => {
           res.json({ status: 'OK' });
         })
       
