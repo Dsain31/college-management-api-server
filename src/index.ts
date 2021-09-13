@@ -4,8 +4,9 @@ import * as http from 'http'
 import dotenv from 'dotenv'
 import { config } from '@config/index';
 import UserController from '@controllers/user.controller';
-import appServer from '@lib/server'
+// import appServer from '@lib/server'
 import DatabaseConnection from '@lib/database/database.connection';
+import { AppServerRouter } from '@lib/server';
 
 dotenv.config()
 class Index {
@@ -13,7 +14,7 @@ class Index {
   server: http.Server;
   constructor() {
     DatabaseConnection.mongoDbConnection()
-    this.app = appServer();
+    this.app = AppServerRouter.routerConfiguration();
     this.app.use(express.static(__dirname + "/../public")); //useful to run scripts file from this directory after deployment
     this.server = new http.Server(this.app);
     this.routes();
@@ -43,7 +44,6 @@ class Index {
 
   }
   routes() {
-    this.app.get('', (req, res) => res.send('okay status'));
     this.app.post('/user',UserController.create);
   }
 
