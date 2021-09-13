@@ -5,12 +5,12 @@ import UserService from "@services/user.service";
 import { User } from "@models/user";
 
 export default class UserController {
-  private static readonly _userRepository = new UserRepository();
   
   public static create(req: Request, res: Response) {
+    const _userRepository = new UserRepository();
     if (!_.isEmpty(req.body)) {
       const user = new User(req.body);
-      return UserService.createUserHandler(user, res, this._userRepository);
+      return UserService.createUserHandler(user, res, _userRepository);
     }
     return res.json({message: 'Fields are required'});
   }
