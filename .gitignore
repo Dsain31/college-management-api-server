@@ -1,3 +1,8 @@
 /node_modules
 /dist
 /public
+.github/workflows/firebase-hosting-pull-request.yml
+.firebase/hosting.cHVibGlj.cache
+.github/workflows/firebase-hosting-merge.yml
+firebase.json
+.firebaserc
