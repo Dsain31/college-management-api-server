@@ -2,13 +2,14 @@
   "name": "college-management-api-server",
   "version": "1.0.0",
   "description": "api-server",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run tsc",
     "tsc": "tsc --project tsconfig.json",
-    "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js",
-    "start": "npm run build && cross-env NODE_ENV=production node dist/index.js"
+    "build": "npm run tsc",
+    "start": "npm run build && cross-env NODE_ENV=production node dist/index.js",
+    "start:dev": "nodemon --watch 'src/**/*.ts' --ignore 'node_modules/**/*' --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "start:local": "npm run build && cross-env NODE_ENV=local node dist/index.js",
+    "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js"
   },
   "engines": {
     "node": "12.4.0"
