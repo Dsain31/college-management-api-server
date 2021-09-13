@@ -14,7 +14,7 @@ class Index {
   constructor() {
     DatabaseConnection.mongoDbConnection()
     this.app = appServer();
-    this.app.use(express.static(__dirname + "/../public"));
+    this.app.use(express.static(__dirname + "/../public")); //useful to run scripts file from this directory after deployment
     this.server = new http.Server(this.app);
     this.routes();
   }
@@ -43,7 +43,7 @@ class Index {
 
   }
   routes() {
-    this.app.get('/ping', (req, res) => res.send('okk'));
+    this.app.get('', (req, res) => res.send('okay status'));
     this.app.post('/user',UserController.create);
   }
 
