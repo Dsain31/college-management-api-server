@@ -19,7 +19,7 @@ class Index {
   }
 
   public bootstrap() {
-    this.server.listen(config.PORT)
+    this.server.listen(process.env.PORT || config.PORT)
     this.server.on('error', (e: Error) => {
       console.log('Error starting server' + e)
     })
