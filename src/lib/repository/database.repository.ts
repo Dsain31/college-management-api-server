@@ -1,4 +1,4 @@
-import { Collection, Db, InsertOneResult, ObjectId } from "mongodb";
+import { Collection, Db, InsertOneResult } from "mongodb";
 import{ _mongoDB } from "../database/database.connection";
 
 export default class DatabaseRepository<T> {
