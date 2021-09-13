@@ -1,5 +1,5 @@
 import { CorsOptions } from 'cors';
-import { IConfig } from 'src/interface/IConfig';
+import { IConfig } from 'src/interfaces/IConfig';
 
 export default class ProductionConfig implements IConfig {
     public PORT = 3000

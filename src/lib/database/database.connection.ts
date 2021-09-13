@@ -1,4 +1,4 @@
-import { config } from "./../../config/index";
+import { config } from "@config/index";
 import { Db, MongoClient } from "mongodb";
 export let _mongoDB: Db;
 export default class DatabaseConnection {

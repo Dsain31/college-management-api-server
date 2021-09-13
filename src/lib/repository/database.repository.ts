@@ -1,5 +1,5 @@
+import { _mongoDB } from "@lib/database/database.connection";
 import { Collection, Db, InsertOneResult } from "mongodb";
-import{ _mongoDB } from "../database/database.connection";
 
 export default class DatabaseRepository<T> {
   private readonly _db: Db;

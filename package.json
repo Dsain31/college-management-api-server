@@ -17,6 +17,16 @@
   },
   "author": "deepak sain",
   "license": "ISC",
+  "_moduleAliases": {
+    "@lib": "dist/lib",
+    "@config": "dist/config",
+    "@controllers": "dist/api/controllers",
+    "@models": "dist/api//models",
+    "@services": "dist/api/services",
+    "@repository": "dist/api/repository",
+    "@utils": "dist/api/utils",
+    "@interfaces": "dist/interfaces"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
@@ -35,6 +45,7 @@
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "lodash": "^4.17.21",
+    "module-alias": "^2.2.2",
     "mongodb": "^4.1.1"
   }
 }

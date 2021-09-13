@@ -1,5 +1,5 @@
-import { IsDate, IsEmpty, IsInt, Max, Min } from "class-validator";
-import { CommonStatus, UserRole } from "../utils/constants/common.status";
+import { CommonStatus, UserRole } from "@utils/constants/common.status";
+import { IsDate, IsInt, Max, Min } from "class-validator";
 
 export class User {
     _id: string | undefined;

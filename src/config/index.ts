@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv'
 import ProductionConfig from './production.config'
 import LocalConfig from './local.config'
-import { IConfig } from 'src/interface/IConfig';
+import { IConfig } from 'src/interfaces/IConfig';
 
 dotenv.config()
 console.log('process.env.NODE_ENV ===', process.env.NODE_ENV);

@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
-import { IUser } from "../models/user";
 import { Response } from "express";
-import UserRepository from "../repository/user.repository";
+import UserRepository from "@repository/user.repository";
+import { IUser } from "@models/user";
 
 export default class UserService {
 

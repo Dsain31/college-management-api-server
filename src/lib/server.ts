@@ -1,7 +1,7 @@
 import express from 'express';
 import cors = require('cors');
 import helmet = require('helmet');
-import { config } from './../config/index';
+import { config } from '@config/index';
 
 export class AppServerRouter {
     public static routerConfiguration(): express.Express {
