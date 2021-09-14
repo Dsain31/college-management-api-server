@@ -29,4 +29,14 @@ export default class UserController {
     const _userRepository = new UserRepository();
     return UserService.getUserListHandler(req.query, res, _userRepository);
   }
+
+  public static updateById(req: Request, res: Response) {
+    const _userRepository = new UserRepository();
+    if (!_.isEmpty(req.body)) {
+      const updateUserData = new User(req.body);
+      const filterQuery = req.query;
+      return UserService.updateUserHandler(filterQuery, updateUserData, res, _userRepository);
+    }
+    return res.json({ message:  SystemConstants.FIELDS_REQUIRED_MSG});
+  }
 }

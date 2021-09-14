@@ -10,5 +10,6 @@ export default class SystemConstants {
     public static readonly PASSWORD_NOT_MATCH_MSG = 'Password did not match';
     public static readonly LOGIN_SUCCESS_MSG = 'Logged in successfully';
     public static readonly RECORD_NOT_FOUND_MSG = 'Record did not find';
-
+    public static readonly UPDATE_SUCCESS_MSG = 'Updated successfully';
+    public static readonly ID_REQUIRE_MSG = 'User id is required';
 }
