@@ -120,7 +120,8 @@ export default class UserService {
                     if (userResult.acknowledged) {
                         return res.status(200).json({
                             statusCode: 200,
-                            message: SystemConstants.UPDATE_SUCCESS_MSG
+                            data: user,
+                            message: SystemConstants.LOGIN_SUCCESS_MSG
                         })
                     }
                     throw new Error().message = SystemConstants.RECORD_UN_SUCCESS_MSG;
@@ -147,6 +148,33 @@ export default class UserService {
                     statusCode: 200,
                     data: userListCount
             })
+        } catch(error) {
+            return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
+        }
+    }
+
+    public static async getUserListHandler(reqQuery:Record<string, any> ,res: Response, _userRepository: UserRepository): Promise<Response<any, Record<string, any>> | undefined> {
+        try {
+            const filterOptions: any = {
+                limit: +reqQuery.limit || 10,
+                skip: +reqQuery.skip || 0,
+                sort: {createdDate: -1}
+            }
+            
+            const whereQ: any =  reqQuery?.role ? {userRole: +reqQuery?.role}: {};
+            if (reqQuery.status) {
+                whereQ.status = {$in: [+reqQuery.status]}
+            }
+            const userList = await _userRepository.find(whereQ, filterOptions)
+            if (!_.isEmpty(userList)) {
+                return res.json(
+                    {
+                        statusCode: 200,
+                        data: userList
+                    })
+            } else {
+                throw new Error().message = SystemConstants.RECORD_NOT_FOUND_MSG
+            }
         } catch(error) {
             return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
         }

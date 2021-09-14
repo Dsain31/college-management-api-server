@@ -52,6 +52,8 @@ class Index {
     this.app.put('/application',ApplicationController.create);
     this.app.put('/application/update',ApplicationController.updateById);
 
+    this.app.get('/user/admin-list',UserController.getUserList);
+    this.app.get('/user/student-list',UserController.getUserList);
   }
 
 }
