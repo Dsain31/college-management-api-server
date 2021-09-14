@@ -7,16 +7,19 @@ import bodyParser from 'body-parser'
 export class AppServerRouter {
   public static routerConfiguration(): express.Express {
     const app: express.Express = express()
-  
+
     app.use(cors(config.corsOptions))
     app.use(helmet())
     app.set('env', process.env.NODE_ENV);
-    app.use(bodyParser.json())
-    app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(express.json())
+    app.use(express.urlencoded({ extended: true }))
     app.use(useragent.express())
     app.use('/ping', (req: Request, res: Response) => {
       res.status(200).send('server is running');
-    } )
+    })
+
+    // app.use(app.router) // middleware errors handling
+    
     return app
   }
  

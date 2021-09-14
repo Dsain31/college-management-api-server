@@ -4,7 +4,6 @@ import * as http from 'http'
 import dotenv from 'dotenv'
 import { config } from '@config/index';
 import UserController from '@controllers/user.controller';
-// import appServer from '@lib/server'
 import DatabaseConnection from '@lib/database/database.connection';
 import { AppServerRouter } from '@lib/server';
 
@@ -45,6 +44,7 @@ class Index {
   }
   routes() {
     this.app.post('/user',UserController.create);
+    this.app.post('/user/login',UserController.login);
   }
 
 }
