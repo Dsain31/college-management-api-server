@@ -24,4 +24,9 @@ export default class UserController {
     }
     return res.json({ message:  SystemConstants.FIELDS_REQUIRED_MSG});
   }
+  
+  public static getUserList(req: Request, res: Response) {
+    const _userRepository = new UserRepository();
+    return UserService.getUserListHandler(req.query, res, _userRepository);
+  }
 }

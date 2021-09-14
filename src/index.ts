@@ -45,6 +45,8 @@ class Index {
   routes() {
     this.app.post('/user',UserController.create);
     this.app.post('/user/login',UserController.login);
+    this.app.get('/user/admin-list',UserController.getUserList);
+    this.app.get('/user/student-list',UserController.getUserList);
   }
 
 }

@@ -65,13 +65,41 @@ export default class UserService {
                     return res.json(
                         {
                             statusCode: 200,
-                            data: user
+                            data: user,
+                            message: SystemConstants.LOGIN_SUCCESS_MSG
                         })
                 } else {
                     throw new Error().message = SystemConstants.USER_NOT_APPROVE_MSG;
                 }
             }
         } catch (error) {
+            return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
+        }
+    }
+
+    public static async getUserListHandler(reqQuery:Record<string, any> ,res: Response, _userRepository: UserRepository): Promise<Response<any, Record<string, any>> | undefined> {
+        try {
+            const filterOptions: any = {
+                limit: +reqQuery.limit || 10,
+                skip: +reqQuery.skip || 0,
+                sort: {createdDate: -1}
+            }
+            
+            const whereQ: any =  reqQuery?.role ? {userRole: +reqQuery?.role}: {};
+            if (reqQuery.status) {
+                whereQ.status = {$in: [+reqQuery.status]}
+            }
+            const userList = await _userRepository.find(whereQ, filterOptions)
+            if (!_.isEmpty(userList)) {
+                return res.json(
+                    {
+                        statusCode: 200,
+                        data: userList
+                    })
+            } else {
+                throw new Error().message = SystemConstants.RECORD_NOT_FOUND_MSG
+            }
+        } catch(error) {
             return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
         }
     }
