@@ -7,6 +7,7 @@ import _ from "lodash";
 import { CommonStatus, UserRole } from "@utils/constants/common/common.status";
 import bcrypt from 'bcrypt';
 import { config } from "@config/index";
+import { ObjectId } from "mongodb";
 export default class UserService {
 
     public static async createUserHandler(userReqData: IUser, res: Response, _userRepository: UserRepository): Promise<Response<any, Record<string, any>>>{
@@ -176,6 +177,34 @@ export default class UserService {
                 throw new Error().message = SystemConstants.RECORD_NOT_FOUND_MSG
             }
         } catch(error) {
+            return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
+        }
+    }
+
+    public static async updateUserHandler(reqQueryData:Record<string, any>, updateData: IUser, res: Response, _userRepository: UserRepository): Promise<Response<any, Record<string, any>>>{
+        try {
+
+            if(reqQueryData.id) {
+                const filterQuery = { _id: new ObjectId(reqQueryData.id) }
+                const user = await _userRepository.findOne(filterQuery)
+    
+                if (!_.isEmpty(user)) {
+                    updateData.modifiedDate = new Date();
+                    const userResult = await _userRepository.updateOne(filterQuery, updateData);
+                    if (userResult.acknowledged) {
+                        return res.status(200).json({
+                            statusCode: 200,
+                            message: SystemConstants.UPDATE_SUCCESS_MSG
+                        })
+                    }
+                    throw new Error().message = SystemConstants.RECORD_UN_SUCCESS_MSG;
+                } else {
+                    throw new Error().message = SystemConstants.USER_NOT_EXISTS_MSG
+                }
+            } else {
+                throw new Error().message = SystemConstants.ID_REQUIRE_MSG
+            }
+        } catch (error: unknown) {
             return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
         }
     }
