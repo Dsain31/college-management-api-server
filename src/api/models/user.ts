@@ -1,4 +1,4 @@
-import { CommonStatus, UserRole } from "@utils/constants/common.status";
+import { CommonStatus, UserRole } from "@utils/constants/common/common.status";
 import { IsDate, IsInt, Max, Min } from "class-validator";
 
 export class User {
@@ -12,7 +12,6 @@ export class User {
     username: string | undefined;
 
     @Min(6)
-    @Max(20)
     email: string | undefined;
 
     @Min(6)

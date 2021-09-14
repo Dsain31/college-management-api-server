@@ -1,5 +1,5 @@
 import { _mongoDB } from "@lib/database/database.connection";
-import { Collection, Db, InsertOneResult } from "mongodb";
+import { Collection, Db, Filter, FindOptions, InsertOneResult} from "mongodb";
 
 export default class DatabaseRepository<T> {
   private readonly _db: Db;
@@ -13,6 +13,10 @@ export default class DatabaseRepository<T> {
 
   public async insertOne(doc: T): Promise<InsertOneResult<T>> {
     return await this._collection.insertOne(doc);
+  }
+
+  public async findOne(filterQuery: Filter<Record<string, any>>, projectionOptions?: FindOptions): Promise<T | null>{
+    return await this._collection.findOne(filterQuery, projectionOptions);
   }
 
 }

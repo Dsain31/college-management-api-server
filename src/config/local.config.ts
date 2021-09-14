@@ -3,9 +3,6 @@ import { IConfig } from 'src/interfaces/IConfig';
 
 export default class LocalConfig implements IConfig {
     public PORT = 3000
-    public clientPort = 4200
-    public HOST = 'http://localhost'
-    public baseUrl = this.HOST + ':' + this.clientPort
     public corsOptions: CorsOptions = {
         origin: '*',
         methods: 'GET,POST,PUT,DELETE',
