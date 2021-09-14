@@ -1,9 +1,9 @@
 import { _mongoDB } from "@lib/database/database.connection";
-import { Collection, Db, Filter, FindCursor, FindOptions, InsertOneResult, UpdateFilter, UpdateResult} from "mongodb";
+import { Collection, CountDocumentsOptions, Db, Filter, FindCursor, FindOptions, InsertOneResult, UpdateFilter, UpdateResult} from "mongodb";
 
 export default class DatabaseRepository<T> {
   private readonly _db: Db;
-  private readonly _collection: Collection;
+  readonly _collection: Collection;
   private readonly _collectionName: string;
   constructor(collectionName: string)  {
     this._db = _mongoDB;
@@ -24,7 +24,11 @@ export default class DatabaseRepository<T> {
   }
 
   public async updateOne(filter:  Filter<Record<string, any>>, update: UpdateFilter<T> | Partial<T>): Promise<UpdateResult> {
-    return await this._collection.updateOne(filter, {$set: update});
+    return await this._collection.updateOne(filter, update);
+  }
+
+  public async getCount(filter:  Filter<Record<string, any>>, options?: CountDocumentsOptions): Promise<number> {
+    return await this._collection.countDocuments(filter);
   }
 
 }

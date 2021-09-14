@@ -47,6 +47,7 @@ class Index {
     this.app.post('/user/login',UserController.login);
     this.app.get('/user/user-list',UserController.getUserList);
     this.app.put('/user/update',UserController.updateById);
+    this.app.get('/user/user-list-count',UserController.getUserListCounts);
   }
 
 }
