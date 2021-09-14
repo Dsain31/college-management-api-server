@@ -162,8 +162,8 @@ export default class UserService {
                 sort: {createdDate: -1}
             }
             
-            const whereQ: any =  reqQuery?.role ? {userRole: +reqQuery?.role}: {};
-            if (reqQuery.status) {
+            const whereQ: any = reqQuery?.role ? +reqQuery.role ? {userRole: +reqQuery?.role} : {} : {};
+            if (+reqQuery.status) {
                 whereQ.status = {$in: [+reqQuery.status]}
             }
             const userList = await _userRepository.find(whereQ, filterOptions)
@@ -190,7 +190,7 @@ export default class UserService {
     
                 if (!_.isEmpty(user)) {
                     updateData.modifiedDate = new Date();
-                    const userResult = await _userRepository.updateOne(filterQuery, updateData);
+                    const userResult = await _userRepository.updateOne(filterQuery, {$set: updateData});
                     if (userResult.acknowledged) {
                         return res.status(200).json({
                             statusCode: 200,
@@ -205,6 +205,23 @@ export default class UserService {
                 throw new Error().message = SystemConstants.ID_REQUIRE_MSG
             }
         } catch (error: unknown) {
+            return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
+        }
+    }
+
+    public static async getUserListCountHandler(reqQuery:Record<string, any> ,res: Response, _userRepository: UserRepository): Promise<Response<any, Record<string, any>> | undefined> {
+        try {
+            
+            const whereQ: any =  reqQuery?.role ? +reqQuery.role ? {userRole: +reqQuery?.role} : {} : {};
+            if (+reqQuery.status) {
+                whereQ.status = {$in: [+reqQuery.status]}
+            }
+            const userListCount = await _userRepository.getCount(whereQ)
+            return res.json({
+                    statusCode: 200,
+                    data: userListCount
+            })
+        } catch(error) {
             return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
         }
     }
