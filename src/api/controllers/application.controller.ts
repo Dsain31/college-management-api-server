@@ -3,6 +3,7 @@ import { Response, Request } from "express";
 import ApplicationRepository from "@repository/application.repository";
 import SystemConstants from "@utils/constants/system/system.constants";
 import ApplicationService from "@services/application.service";
+import _ from "lodash";
 
 export default class ApplicationController {
   public static create(req: Request, res: Response) {

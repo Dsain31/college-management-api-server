@@ -35,6 +35,8 @@ export class Application {
 
     course: string | undefined;
 
+    commentData: string | undefined;
+
 
     @IsDate()
     createdDate: Date;
@@ -55,6 +57,7 @@ export class Application {
         if(obj.userId) this.userId = obj.userId;
         if(obj.subject) this.subject = obj.subject.trim();
         this.status = CommonStatus.PENDING;
+        if(obj.commentData) this.commentData = obj.commentData || '';
         this.modifiedDate = obj.modifiedDate || new Date();
         this.createdDate = obj.createdDate || new Date();
     }
