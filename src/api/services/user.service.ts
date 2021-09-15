@@ -4,7 +4,7 @@ import UserRepository from "@repository/user.repository";
 import { IUser } from "@models/user";
 import SystemConstants from "@utils/constants/system/system.constants";
 import _ from "lodash";
-import { CommonStatus } from "@utils/constants/common/common.status";
+import { CommonStatus, UserRole } from "@utils/constants/common/common.status";
 import bcrypt from 'bcrypt';
 import { config } from "@config/index";
 export default class UserService {
@@ -62,16 +62,92 @@ export default class UserService {
                     if (!isPasswordValid) {
                         throw new Error().message = SystemConstants.PASSWORD_NOT_MATCH_MSG;
                     }
-                    return res.json(
-                        {
-                            statusCode: 200,
-                            data: user
-                        })
-                } else {
+                    return res.json({
+                        statusCode: 200,
+                        data: user,
+                        message: SystemConstants.LOGIN_SUCCESS_MSG
+                    })
+                } 
+                else if (user?.status === CommonStatus.DECLINE) {
+                    throw new Error().message = SystemConstants.USER_REJECT_MSG;
+                }
+                else {
                     throw new Error().message = SystemConstants.USER_NOT_APPROVE_MSG;
                 }
             }
         } catch (error) {
+            return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
+        }
+    }
+
+    public static async getUserListHandler(reqQuery:Record<string, any> ,res: Response, _userRepository: UserRepository): Promise<Response<any, Record<string, any>> | undefined> {
+        try {
+            const filterOptions: any = {
+                limit: +reqQuery.limit || 10,
+                skip: +reqQuery.skip || 0,
+                sort: {createdDate: -1}
+            }
+            
+            const whereQ: any = reqQuery?.role ? +reqQuery.role ? {userRole: +reqQuery?.role} : {userRole: {$nin: [UserRole.SUPER_ADMIN]}} : {userRole: {$nin: [UserRole.SUPER_ADMIN]}};
+            if (+reqQuery.status) {
+                whereQ.status = {$in: [+reqQuery.status]}
+            }
+            const userList = await _userRepository.find(whereQ, filterOptions)
+            if (!_.isEmpty(userList)) {
+                return res.json(
+                    {
+                        statusCode: 200,
+                        data: userList
+                    })
+            } else {
+                throw new Error().message = SystemConstants.RECORD_NOT_FOUND_MSG
+            }
+        } catch(error) {
+            return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
+        }
+    }
+
+    public static async updateUserHandler(reqQueryData:Record<string, any>, updateData: IUser, res: Response, _userRepository: UserRepository): Promise<Response<any, Record<string, any>>>{
+        try {
+
+            if(reqQueryData.id) {
+                const filterQuery = { _id: new ObjectId(reqQueryData.id) }
+                const user = await _userRepository.findOne(filterQuery)
+    
+                if (!_.isEmpty(user)) {
+                    updateData.modifiedDate = new Date();
+                    const userResult = await _userRepository.updateOne(filterQuery, {$set: updateData});
+                    if (userResult.acknowledged) {
+                        return res.status(200).json({
+                            statusCode: 200,
+                            message: SystemConstants.UPDATE_SUCCESS_MSG
+                        })
+                    }
+                    throw new Error().message = SystemConstants.RECORD_UN_SUCCESS_MSG;
+                } else {
+                    throw new Error().message = SystemConstants.USER_NOT_EXISTS_MSG
+                }
+            } else {
+                throw new Error().message = SystemConstants.ID_REQUIRE_MSG
+            }
+        } catch (error: unknown) {
+            return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
+        }
+    }
+
+    public static async getUserListCountHandler(reqQuery:Record<string, any> ,res: Response, _userRepository: UserRepository): Promise<Response<any, Record<string, any>> | undefined> {
+        try {
+            
+            const whereQ: any = reqQuery?.role ? +reqQuery.role ? {userRole: +reqQuery?.role} : {userRole: {$nin: [UserRole.SUPER_ADMIN]}} : {userRole: {$nin: [UserRole.SUPER_ADMIN]}};
+            if (+reqQuery.status) {
+                whereQ.status = {$in: [+reqQuery.status]}
+            }
+            const userListCount = await _userRepository.getCount(whereQ)
+            return res.json({
+                    statusCode: 200,
+                    data: userListCount
+            })
+        } catch(error) {
             return res.status(SystemConstants.CUSTOM_STATUS_CODE).json(error)
         }
     }

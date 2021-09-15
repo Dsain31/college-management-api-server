@@ -6,6 +6,7 @@ import { config } from '@config/index';
 import UserController from '@controllers/user.controller';
 import DatabaseConnection from '@lib/database/database.connection';
 import { AppServerRouter } from '@lib/server';
+import ApplicationController from '@controllers/application.controller';
 
 dotenv.config()
 class Index {
@@ -45,6 +46,12 @@ class Index {
   routes() {
     this.app.post('/user',UserController.create);
     this.app.post('/user/login',UserController.login);
+    this.app.get('/user/user-list',UserController.getUserList);
+    this.app.put('/user/update',UserController.updateById);
+    this.app.get('/user/user-list-count',UserController.getUserListCounts);
+    this.app.put('/application',ApplicationController.create);
+    this.app.put('/application/update',ApplicationController.updateById);
+
   }
 
 }
