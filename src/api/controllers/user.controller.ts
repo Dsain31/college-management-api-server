@@ -33,7 +33,7 @@ export default class UserController {
   public static updateById(req: Request, res: Response) {
     const _userRepository = new UserRepository();
     if (!_.isEmpty(req.body)) {
-      const updateUserData = new User(req.body);
+      const updateUserData = req.body;
       const filterQuery = req.query;
       return UserService.updateUserHandler(filterQuery, updateUserData, res, _userRepository);
     }

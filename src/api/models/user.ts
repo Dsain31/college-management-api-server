@@ -59,8 +59,8 @@ export class User {
         if(obj.department) this.department = obj.department.trim();
         if(obj.subject) this.subject = obj.subject.trim();
         this.status = CommonStatus.PENDING;
-        this.modifiedDate = obj.createdDate || new Date();
-        this.createdDate = obj.modifiedDate || new Date();
+        this.modifiedDate = obj.modifiedDate || new Date();
+        this.createdDate = obj.createdDate || new Date();
     }
 
 
