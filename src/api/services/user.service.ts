@@ -122,7 +122,7 @@ export default class UserService {
                         return res.status(200).json({
                             statusCode: 200,
                             data: user,
-                            message: SystemConstants.LOGIN_SUCCESS_MSG
+                            message: SystemConstants.UPDATE_SUCCESS_MSG
                         })
                     }
                     throw new Error().message = SystemConstants.RECORD_UN_SUCCESS_MSG;
