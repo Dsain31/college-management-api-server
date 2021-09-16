@@ -54,7 +54,7 @@ export class User {
         if(obj.address) this.address = obj.address.trim();
         if(obj.mobileNumber) this.mobileNumber = obj.mobileNumber;
         if(obj.age) this.age = obj.age;
-        if(obj.userRole) this.userRole = obj.userRole;
+        this.userRole = obj.userRole;
         if(obj.education) this.education = obj.education.trim();
         if(obj.department) this.department = obj.department.trim();
         if(obj.subject) this.subject = obj.subject.trim();
