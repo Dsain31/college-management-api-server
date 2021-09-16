@@ -62,7 +62,7 @@ export default class ApplicationService {
                 sort: {createdDate: -1}
             }
             
-            if(reqQuery.userId) {
+            if(+reqQuery.userId) {
                 whereQ.userId = {$in: [new ObjectId(reqQuery.userId)]};                
             }
            if (+reqQuery.status) {
@@ -82,7 +82,7 @@ export default class ApplicationService {
     public static async getApplicationCountByIdHandler(reqQuery: any, res: Response,  _applicationRepository: ApplicationRepository): Promise<Response<any, Record<string, any>> | undefined> {
         try {
             const whereQ: any = {};
-             if(reqQuery.userId) {
+             if(+reqQuery.userId) {
                  whereQ.userId = {$in: [new ObjectId(reqQuery.userId)]};                
              }
             if (+reqQuery.status) {

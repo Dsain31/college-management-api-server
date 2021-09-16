@@ -6,7 +6,6 @@
   "scripts": {
     "build": "npm run tsc",
     "tsc": "tsc --project tsconfig.json",
-    "start:dev": "nodemon --watch 'src/**/*.ts' --ignore 'node_modules/**/*' --exec ts-node -r tsconfig-paths/register src/index.ts",
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "start:prod": "npm run build && cross-env NODE_ENV=production node public/index.js"
   },

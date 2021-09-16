@@ -5,6 +5,4 @@ export interface IConfig {
     corsOptions: CorsOptions
     mongoConnectionURL: string
     BCRYPT_SALT_ROUNDS: number
-    JWT_SECRET: string
-    JWT_EXPIRESIN: string
 }

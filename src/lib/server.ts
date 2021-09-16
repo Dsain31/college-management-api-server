@@ -3,7 +3,6 @@ import cors = require('cors');
 import helmet = require('helmet');
 import { config } from '@config/index';
 import * as useragent from 'express-useragent';
-import bodyParser from 'body-parser'
 export class AppServerRouter {
   public static routerConfiguration(): express.Express {
     const app: express.Express = express()
