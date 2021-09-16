@@ -30,10 +30,11 @@ db.User.insertOne({
     "lName" : "admin",
     "username" : "super-admin",
     "email" : "deepak@admin.com",
-    "password" : "$2b$12$AaBHawX.qVpPgLgOWGLuyerhSCC1gHh190oZ.S7PY/EVapPdToV56",
-    "address" : "",
+    "password" : "123456",
     "userRole" : 0,
-    "status" : 1,
-    "modifiedDate" : ISODate("2021-09-15T02:39:16.362Z"),
-    "createdDate" : ISODate("2021-09-14T12:54:53.684Z")
-}) 
+    "status" : 1
+})
+
+## super admin login details...
+  email: deepak@admin.com
+  password: 123456
