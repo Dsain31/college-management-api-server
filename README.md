@@ -38,3 +38,6 @@ db.User.insertOne({
 ## super admin login details...
   email: deepak@admin.com
   password: 123456
+
+## live heroku URL for nodejs
+   https://ds-college-management-server.herokuapp.com/ping
