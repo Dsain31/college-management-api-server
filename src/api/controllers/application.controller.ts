@@ -24,4 +24,17 @@ export default class ApplicationController {
     }
     return res.json({ message: SystemConstants.FIELDS_REQUIRED_MSG });
   }
+
+  public static getApplicationListById(req: Request, res: Response) {
+    const _applicationRepository = new ApplicationRepository();
+    const filterQuery = req.query;
+    return ApplicationService.getApplicationListByIdHandler(filterQuery, res, _applicationRepository);
+  }
+
+  public static getApplicationCountById(req: Request, res: Response) {
+    const _applicationRepository = new ApplicationRepository();
+    const filterQuery = req.query;
+    return ApplicationService.getApplicationCountByIdHandler(filterQuery, res, _applicationRepository);
+  }
+
 }

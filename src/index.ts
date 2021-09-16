@@ -49,9 +49,10 @@ class Index {
     this.app.get('/user/user-list',UserController.getUserList);
     this.app.put('/user/update',UserController.updateById);
     this.app.get('/user/user-list-count',UserController.getUserListCounts);
-    this.app.put('/application',ApplicationController.create);
+    this.app.post('/application',ApplicationController.create);
     this.app.put('/application/update',ApplicationController.updateById);
-
+    this.app.get('/application/get-application-list',ApplicationController.getApplicationListById);
+    this.app.get('/application/get-application-count',ApplicationController.getApplicationCountById);
     this.app.get('/user/admin-list',UserController.getUserList);
     this.app.get('/user/student-list',UserController.getUserList);
     this.app.put('/user/update',UserController.updateById);
